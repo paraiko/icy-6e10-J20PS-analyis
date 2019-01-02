@@ -17,8 +17,8 @@
 <variables>
 <input>
 <variable ID="input" name="input" runtime="false" visible="true"/>
-<variable ID="filterX" name="sigma (x)" runtime="false" value="5.0" visible="true"/>
-<variable ID="filterY" name="sigma (y)" runtime="false" value="5.0" visible="true"/>
+<variable ID="filterX" name="sigma (x)" runtime="false" value="3.0" visible="true"/>
+<variable ID="filterY" name="sigma (y)" runtime="false" value="3.0" visible="true"/>
 <variable ID="filterZ" name="sigma (z)" runtime="false" value="0.0" visible="true"/>
 </input>
 <output>
@@ -31,7 +31,7 @@
 <input>
 <variable ID="Input" name="Input" runtime="false" visible="true"/>
 <variable ID="channel" name="channel" runtime="false" value="0" visible="true"/>
-<variable ID="Manual thresholds" name="Manual thresholds" runtime="false" value="35.0" visible="true"/>
+<variable ID="Manual thresholds" name="Manual thresholds" runtime="false" value="30.0" visible="true"/>
 <variable ID="Treat as percentiles" name="Treat as percentiles" runtime="false" value="false" visible="true"/>
 </input>
 <output>
@@ -116,12 +116,12 @@
 <variable ID="965488337:input sequence" blockID="965488337" visible="false"/>
 <variable ID="965488337:selection state of ROI to extract" blockID="965488337" value="ALL" visible="false"/>
 <variable ID="2119048107:input" blockID="2119048107" visible="false"/>
-<variable ID="2119048107:filterX" blockID="2119048107" value="5.0" visible="false"/>
-<variable ID="2119048107:filterY" blockID="2119048107" value="5.0" visible="false"/>
+<variable ID="2119048107:filterX" blockID="2119048107" value="3.0" visible="false"/>
+<variable ID="2119048107:filterY" blockID="2119048107" value="3.0" visible="false"/>
 <variable ID="2119048107:filterZ" blockID="2119048107" value="0.0" visible="false"/>
 <variable ID="1495536768:Input" blockID="1495536768" visible="false"/>
 <variable ID="1495536768:channel" blockID="1495536768" value="0" visible="false"/>
-<variable ID="1495536768:Manual thresholds" blockID="1495536768" value="35.0" visible="false"/>
+<variable ID="1495536768:Manual thresholds" blockID="1495536768" value="30.0" visible="false"/>
 <variable ID="1495536768:Treat as percentiles" blockID="1495536768" value="false" visible="false"/>
 <variable ID="984519307:target sequence" blockID="984519307" visible="false"/>
 <variable ID="984519307:input rois" blockID="984519307" value="1 ROI" visible="false"/>
