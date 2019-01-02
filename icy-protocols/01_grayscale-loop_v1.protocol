@@ -1,0 +1,51 @@
+<protocol VERSION="4">
+<blocks>
+<workflow ID="500973361" blockType="plugins.adufour.blocks.lang.SequenceFileBatch" className="plugins.adufour.blocks.lang.SequenceFileBatch" collapsed="false" definedName="Sequence file batch" height="763" keepsResults="true" width="1110" xLocation="0" yLocation="1">
+<blocks>
+<block ID="259885883" blockType="plugins.tprovoost.sequenceblocks.convert.ConvertColor" className="plugins.tprovoost.sequenceblocks.SequenceBlocks" collapsed="false" definedName="Convert color" height="127" keepsResults="true" width="223" xLocation="295" yLocation="12">
+<variables>
+<input>
+<variable ID="Sequence" name="Sequence" runtime="false" visible="true"/>
+<variable ID="Conversion" name="Conversion" runtime="false" value="GRAY" visible="true"/>
+<variable ID="Lut" name="Lut" runtime="false" value="" visible="true"/>
+</input>
+<output>
+<variable ID="Out" name="Out" runtime="false" visible="true"/>
+</output>
+</variables>
+</block>
+<block ID="1613016285" blockType="plugins.adufour.blocks.tools.io.SequenceToFile" className="plugins.adufour.blocks.tools.io.SequenceToFile" collapsed="false" definedName="Sequence to file" height="83" keepsResults="true" width="232" xLocation="638" yLocation="47">
+<variables>
+<input>
+<variable ID="folder" name="File or folder" runtime="false" value="/home/paraiko/J20-_6e10/01_convert-to-grayimage" visible="true"/>
+<variable ID="sequence" name="sequence" runtime="false" visible="true"/>
+</input>
+<output/>
+</variables>
+</block>
+</blocks>
+<links>
+<link dstBlockID="259885883" dstVarID="Sequence" srcBlockID="500973361" srcVarID="Sequence"/>
+<link dstBlockID="1613016285" dstVarID="sequence" srcBlockID="259885883" srcVarID="Out"/>
+</links>
+<variables>
+<input>
+<variable ID="folder" blockID="500973361" value="/home/paraiko/J20-_6e10/00_raw" visible="true"/>
+<variable ID="extension" blockID="500973361" value=".tif" visible="true"/>
+<variable ID="Include sub-folders" blockID="500973361" value="true" visible="true"/>
+<variable ID="259885883:Sequence" blockID="259885883" visible="false"/>
+<variable ID="259885883:Conversion" blockID="259885883" value="GRAY" visible="false"/>
+<variable ID="259885883:Lut" blockID="259885883" value="" visible="false"/>
+<variable ID="1613016285:folder" blockID="1613016285" value="/home/paraiko/J20-_6e10/01_convert-to-grayimage" visible="false"/>
+<variable ID="1613016285:sequence" blockID="1613016285" visible="false"/>
+</input>
+<output>
+<variable ID="iteration" blockID="500973361" visible="true"/>
+<variable ID="Sequence" blockID="500973361" visible="true"/>
+<variable ID="259885883:Out" blockID="259885883" visible="false"/>
+</output>
+</variables>
+</workflow>
+</blocks>
+<links/>
+</protocol>
