@@ -1,5 +1,3 @@
-// Click on the button
-// to edit in a frame.
 importClass(Packages.icy.type.point.Point5D)
 importClass(Packages.icy.main.Icy)
 importClass(Packages.icy.sequence.SequenceUtil)
@@ -10,11 +8,11 @@ importClass(Packages.icy.sequence.SequenceUtil)
 // I did not put them to create a light script, easy to read
  
 sequence = input0;
- 
+seqName = sequence.getName(); 
 // define the ROI for the crop
 roiToUse = null;
 
-    // take the 1st ROI
+    // take ROI
 roiToUse = sequence.getROIs().get( input1 );
  
 // test is a ROI hab been found.
@@ -24,7 +22,7 @@ if ( roiToUse == null ) throw "CropScript: At least 1 ROI is needed for this ope
 croppedSequence = SequenceUtil.getSubSequence( sequence, roiToUse );
  
 // display the sequence
-Icy.getMainInterface().addSequence( croppedSequence );
+//Icy.getMainInterface().addSequence( croppedSequence );
  
 // get a copy of the ROI
 roiCopy = roiToUse.getCopy();
@@ -37,6 +35,10 @@ if ( roiCopy.canSetPosition() ) // check if the ROI manage the setPosition metho
  
 // add the final ROI to the cropped sequence
 croppedSequence.addROI( roiCopy, false );
+roiName = roiToUse.getName();
 
+newName = seqName + "_" + roiName;
+croppedSequence.setName(newName);
+croppedSequence.setFilename(newName);
 output0 = croppedSequence;
-
+output1 = roiName;
