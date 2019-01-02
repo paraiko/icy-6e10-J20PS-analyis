@@ -28,7 +28,7 @@
 <block ID="148507260" blockType="plugins.tprovoost.scripteditor.scriptblock.Javascript" className="plugins.tprovoost.scripteditor.scriptblock.Javascript" collapsed="false" definedName="Javascript" height="461" keepsResults="true" width="671" xLocation="102" yLocation="16">
 <variables>
 <input>
-<variable ID="Script" name="" runtime="false" value="importClass(Packages.icy.type.point.Point5D)&#10;importClass(Packages.icy.main.Icy)&#10;importClass(Packages.icy.sequence.SequenceUtil)&#10; &#10;// this script takes a sequence as input, crop it with a ROI,&#10;// and then copy the original ROI and put it at (0,0) location.&#10;// remark: some null-tests are not performed like checking if a sequence exists, if it has ROIs...&#10;// I did not put them to create a light script, easy to read&#10; &#10;sequence = input0;&#10;seqName = sequence.getName(); &#10;// define the ROI for the crop&#10;roiToUse = null;&#10;&#10;    // take ROI&#10;roiToUse = sequence.getROIs().get( input1 );&#10; &#10;// test is a ROI hab been found.&#10;if ( roiToUse == null ) throw &quot;CropScript: At least 1 ROI is needed for this operation.&quot;;&#10; &#10;// crop the sequence.&#10;croppedSequence = SequenceUtil.getSubSequence( sequence, roiToUse );&#10; &#10;// display the sequence&#10;//Icy.getMainInterface().addSequence( croppedSequence );&#10; &#10;// get a copy of the ROI&#10;roiCopy = roiToUse.getCopy();&#10; &#10;if ( roiCopy.canSetPosition() ) // check if the ROI manage the setPosition method&#10;{&#10;    //Set the new 5d position&#10;    roiCopy.setPosition5D( new Point5D.Double( 0 ,0 ,0 ,0 ,0 ) );&#10;}&#10; &#10;// add the final ROI to the cropped sequence&#10;croppedSequence.addROI( roiCopy, false );&#10;roiName = roiToUse.getName();&#10;&#10;newName = seqName + &quot;_&quot; + roiName;&#10;croppedSequence.setName(newName);&#10;croppedSequence.setFilename(newName);&#10;output0 = croppedSequence;&#10;output1 = roiName;" visible="true"/>
+<variable ID="Script" name="" runtime="false" value="importClass(Packages.icy.type.point.Point5D)&#10;importClass(Packages.icy.main.Icy)&#10;importClass(Packages.icy.sequence.SequenceUtil)&#10; &#10;// this script takes a sequence as input, crop it with a ROI,&#10;// and then copy the original ROI and put it at (0,0) location.&#10;// remark: some null-tests are not performed like checking if a sequence exists, if it has ROIs...&#10;// I did not put them to create a light script, easy to read&#10; &#10;sequence = input0;&#10;seqName = sequence.getName(); &#10;// define the ROI for the crop&#10;roiToUse = null;&#10;&#10;    // take ROI&#10;roiToUse = sequence.getROIs().get( input1 );&#10; &#10;// test is a ROI hab been found.&#10;if ( roiToUse == null ) throw &quot;CropScript: At least 1 ROI is needed for this operation.&quot;;&#10; &#10;// crop the sequence.&#10;croppedSequence = SequenceUtil.getSubSequence( sequence, roiToUse );&#10; &#10;// display the sequence&#10;//Icy.getMainInterface().addSequence( croppedSequence );&#10; &#10;// get a copy of the ROI&#10;roiCopy = roiToUse.getCopy();&#10; &#10;if ( roiCopy.canSetPosition() ) // check if the ROI manage the setPosition method&#10;{&#10;    //Set the new 5d position&#10;    roiCopy.setPosition5D( new Point5D.Double( 0 ,0 ,0 ,0 ,0 ) );&#10;}&#10; &#10;// add the final ROI to the cropped sequence&#10;croppedSequence.addROI( roiCopy, false );&#10;roiName = roiToUse.getName();&#10;&#10;newName = seqName + &quot;_&quot; + roiName;&#10;croppedSequence.setName(newName);&#10;croppedSequence.setFilename(newName);&#10;output0 = croppedSequence;&#10;output1 = roiCopy;" visible="true"/>
 <variable ID="Add Input" name="Add Input" runtime="false" value="1" visible="true"/>
 <variable ID="Add output" name="Add output" runtime="false" value="1" visible="true"/>
 <variable ID="input0" name="input0" runtime="false" type="icy.sequence.Sequence" visible="true"/>
@@ -36,8 +36,18 @@
 </input>
 <output>
 <variable ID="output0" name="output0" runtime="false" type="icy.sequence.Sequence" visible="true"/>
-<variable ID="633115472" name="output1" runtime="true" type="java.lang.String" visible="true"/>
+<variable ID="633115472" name="output1" runtime="true" type="[Licy.roi.ROI;" visible="true"/>
 </output>
+</variables>
+</block>
+<block ID="105735108" blockType="plugins.tprovoost.sequenceblocks.op.FillOuterSequence" className="plugins.tprovoost.sequenceblocks.SequenceBlocks" collapsed="false" definedName="Fill outer sequence" height="107" keepsResults="true" width="259" xLocation="817" yLocation="155">
+<variables>
+<input>
+<variable ID="sequence" name="Sequence" runtime="false" visible="true"/>
+<variable ID="rois" name="Roi(s)" runtime="false" visible="true"/>
+<variable ID="value" name="Value" runtime="false" value="0.0" visible="true"/>
+</input>
+<output/>
 </variables>
 </block>
 <block ID="853029192" blockType="plugins.adufour.blocks.tools.io.SequenceToFile" className="plugins.adufour.blocks.tools.io.SequenceToFile" collapsed="false" definedName="Sequence to file" height="83" keepsResults="true" width="194" xLocation="798" yLocation="370">
@@ -52,20 +62,25 @@
 </blocks>
 <links>
 <link dstBlockID="148507260" dstVarID="919504760" srcBlockID="1531107574" srcVarID="iteration"/>
-<link dstBlockID="853029192" dstVarID="sequence" srcBlockID="148507260" srcVarID="output0" srcVarType="icy.sequence.Sequence"/>
+<link dstBlockID="105735108" dstVarID="sequence" srcBlockID="148507260" srcVarID="output0" srcVarType="icy.sequence.Sequence"/>
+<link dstBlockID="853029192" dstVarID="sequence" srcBlockID="105735108" srcVarID="sequence"/>
+<link dstBlockID="105735108" dstVarID="rois" srcBlockID="148507260" srcVarID="633115472" srcVarType="[Licy.roi.ROI;"/>
 </links>
 <variables>
 <input>
 <variable ID="start" blockID="1531107574" value="0" visible="true"/>
 <variable ID="step" blockID="1531107574" value="1" visible="true"/>
 <variable ID="end" blockID="1531107574" value="3" visible="true"/>
-<variable ID="853029192:folder" blockID="853029192" value="/home/paraiko/J20-_6e10/test-output" visible="false"/>
-<variable ID="853029192:sequence" blockID="853029192" visible="false"/>
-<variable ID="148507260:Script" blockID="148507260" value="importClass(Packages.icy.type.point.Point5D)&#10;importClass(Packages.icy.main.Icy)&#10;importClass(Packages.icy.sequence.SequenceUtil)&#10; &#10;// this script takes a sequence as input, crop it with a ROI,&#10;// and then copy the original ROI and put it at (0,0) location.&#10;// remark: some null-tests are not performed like checking if a sequence exists, if it has ROIs...&#10;// I did not put them to create a light script, easy to read&#10; &#10;sequence = input0;&#10;seqName = sequence.getName(); &#10;// define the ROI for the crop&#10;roiToUse = null;&#10;&#10;    // take ROI&#10;roiToUse = sequence.getROIs().get( input1 );&#10; &#10;// test is a ROI hab been found.&#10;if ( roiToUse == null ) throw &quot;CropScript: At least 1 ROI is needed for this operation.&quot;;&#10; &#10;// crop the sequence.&#10;croppedSequence = SequenceUtil.getSubSequence( sequence, roiToUse );&#10; &#10;// display the sequence&#10;//Icy.getMainInterface().addSequence( croppedSequence );&#10; &#10;// get a copy of the ROI&#10;roiCopy = roiToUse.getCopy();&#10; &#10;if ( roiCopy.canSetPosition() ) // check if the ROI manage the setPosition method&#10;{&#10;    //Set the new 5d position&#10;    roiCopy.setPosition5D( new Point5D.Double( 0 ,0 ,0 ,0 ,0 ) );&#10;}&#10; &#10;// add the final ROI to the cropped sequence&#10;croppedSequence.addROI( roiCopy, false );&#10;roiName = roiToUse.getName();&#10;&#10;newName = seqName + &quot;_&quot; + roiName;&#10;croppedSequence.setName(newName);&#10;croppedSequence.setFilename(newName);&#10;output0 = croppedSequence;&#10;output1 = roiName;" visible="false"/>
+<variable ID="148507260:Script" blockID="148507260" value="importClass(Packages.icy.type.point.Point5D)&#10;importClass(Packages.icy.main.Icy)&#10;importClass(Packages.icy.sequence.SequenceUtil)&#10; &#10;// this script takes a sequence as input, crop it with a ROI,&#10;// and then copy the original ROI and put it at (0,0) location.&#10;// remark: some null-tests are not performed like checking if a sequence exists, if it has ROIs...&#10;// I did not put them to create a light script, easy to read&#10; &#10;sequence = input0;&#10;seqName = sequence.getName(); &#10;// define the ROI for the crop&#10;roiToUse = null;&#10;&#10;    // take ROI&#10;roiToUse = sequence.getROIs().get( input1 );&#10; &#10;// test is a ROI hab been found.&#10;if ( roiToUse == null ) throw &quot;CropScript: At least 1 ROI is needed for this operation.&quot;;&#10; &#10;// crop the sequence.&#10;croppedSequence = SequenceUtil.getSubSequence( sequence, roiToUse );&#10; &#10;// display the sequence&#10;//Icy.getMainInterface().addSequence( croppedSequence );&#10; &#10;// get a copy of the ROI&#10;roiCopy = roiToUse.getCopy();&#10; &#10;if ( roiCopy.canSetPosition() ) // check if the ROI manage the setPosition method&#10;{&#10;    //Set the new 5d position&#10;    roiCopy.setPosition5D( new Point5D.Double( 0 ,0 ,0 ,0 ,0 ) );&#10;}&#10; &#10;// add the final ROI to the cropped sequence&#10;croppedSequence.addROI( roiCopy, false );&#10;roiName = roiToUse.getName();&#10;&#10;newName = seqName + &quot;_&quot; + roiName;&#10;croppedSequence.setName(newName);&#10;croppedSequence.setFilename(newName);&#10;output0 = croppedSequence;&#10;output1 = roiCopy;" visible="false"/>
 <variable ID="148507260:Add Input" blockID="148507260" value="1" visible="false"/>
 <variable ID="148507260:Add output" blockID="148507260" value="1" visible="false"/>
 <variable ID="148507260:input0" blockID="148507260" value="" visible="true"/>
 <variable ID="148507260:919504760" blockID="148507260" value="" visible="false"/>
+<variable ID="853029192:folder" blockID="853029192" value="/home/paraiko/J20-_6e10/test-output" visible="false"/>
+<variable ID="853029192:sequence" blockID="853029192" visible="false"/>
+<variable ID="105735108:sequence" blockID="105735108" visible="false"/>
+<variable ID="105735108:rois" blockID="105735108" value="1 ROI" visible="false"/>
+<variable ID="105735108:value" blockID="105735108" value="0.0" visible="false"/>
 </input>
 <output>
 <variable ID="iteration" blockID="1531107574" visible="true"/>
@@ -79,8 +94,8 @@
 <links>
 <link dstBlockID="1775930538" dstVarID="input sequence" srcBlockID="1078018877" srcVarID="Sequence"/>
 <link dstBlockID="708573638" dstVarID="list" srcBlockID="1775930538" srcVarID="extracted rois"/>
-<link dstBlockID="1531107574" dstVarID="end" srcBlockID="708573638" srcVarID="size"/>
 <link dstBlockID="1531107574" dstVarID="148507260:input0" srcBlockID="1775930538" srcVarID="input sequence"/>
+<link dstBlockID="1531107574" dstVarID="end" srcBlockID="708573638" srcVarID="size"/>
 </links>
 <variables>
 <input>
@@ -93,13 +108,16 @@
 <variable ID="1531107574:start" blockID="1531107574" value="0" visible="false"/>
 <variable ID="1531107574:step" blockID="1531107574" value="1" visible="false"/>
 <variable ID="1531107574:end" blockID="1531107574" value="3" visible="false"/>
-<variable ID="1531107574:853029192:folder" blockID="1531107574" value="/home/paraiko/J20-_6e10/test-output" visible="false"/>
-<variable ID="1531107574:853029192:sequence" blockID="1531107574" visible="false"/>
-<variable ID="1531107574:148507260:Script" blockID="1531107574" value="importClass(Packages.icy.type.point.Point5D)&#10;importClass(Packages.icy.main.Icy)&#10;importClass(Packages.icy.sequence.SequenceUtil)&#10; &#10;// this script takes a sequence as input, crop it with a ROI,&#10;// and then copy the original ROI and put it at (0,0) location.&#10;// remark: some null-tests are not performed like checking if a sequence exists, if it has ROIs...&#10;// I did not put them to create a light script, easy to read&#10; &#10;sequence = input0;&#10;seqName = sequence.getName(); &#10;// define the ROI for the crop&#10;roiToUse = null;&#10;&#10;    // take ROI&#10;roiToUse = sequence.getROIs().get( input1 );&#10; &#10;// test is a ROI hab been found.&#10;if ( roiToUse == null ) throw &quot;CropScript: At least 1 ROI is needed for this operation.&quot;;&#10; &#10;// crop the sequence.&#10;croppedSequence = SequenceUtil.getSubSequence( sequence, roiToUse );&#10; &#10;// display the sequence&#10;//Icy.getMainInterface().addSequence( croppedSequence );&#10; &#10;// get a copy of the ROI&#10;roiCopy = roiToUse.getCopy();&#10; &#10;if ( roiCopy.canSetPosition() ) // check if the ROI manage the setPosition method&#10;{&#10;    //Set the new 5d position&#10;    roiCopy.setPosition5D( new Point5D.Double( 0 ,0 ,0 ,0 ,0 ) );&#10;}&#10; &#10;// add the final ROI to the cropped sequence&#10;croppedSequence.addROI( roiCopy, false );&#10;roiName = roiToUse.getName();&#10;&#10;newName = seqName + &quot;_&quot; + roiName;&#10;croppedSequence.setName(newName);&#10;croppedSequence.setFilename(newName);&#10;output0 = croppedSequence;&#10;output1 = roiName;" visible="false"/>
+<variable ID="1531107574:148507260:Script" blockID="1531107574" value="importClass(Packages.icy.type.point.Point5D)&#10;importClass(Packages.icy.main.Icy)&#10;importClass(Packages.icy.sequence.SequenceUtil)&#10; &#10;// this script takes a sequence as input, crop it with a ROI,&#10;// and then copy the original ROI and put it at (0,0) location.&#10;// remark: some null-tests are not performed like checking if a sequence exists, if it has ROIs...&#10;// I did not put them to create a light script, easy to read&#10; &#10;sequence = input0;&#10;seqName = sequence.getName(); &#10;// define the ROI for the crop&#10;roiToUse = null;&#10;&#10;    // take ROI&#10;roiToUse = sequence.getROIs().get( input1 );&#10; &#10;// test is a ROI hab been found.&#10;if ( roiToUse == null ) throw &quot;CropScript: At least 1 ROI is needed for this operation.&quot;;&#10; &#10;// crop the sequence.&#10;croppedSequence = SequenceUtil.getSubSequence( sequence, roiToUse );&#10; &#10;// display the sequence&#10;//Icy.getMainInterface().addSequence( croppedSequence );&#10; &#10;// get a copy of the ROI&#10;roiCopy = roiToUse.getCopy();&#10; &#10;if ( roiCopy.canSetPosition() ) // check if the ROI manage the setPosition method&#10;{&#10;    //Set the new 5d position&#10;    roiCopy.setPosition5D( new Point5D.Double( 0 ,0 ,0 ,0 ,0 ) );&#10;}&#10; &#10;// add the final ROI to the cropped sequence&#10;croppedSequence.addROI( roiCopy, false );&#10;roiName = roiToUse.getName();&#10;&#10;newName = seqName + &quot;_&quot; + roiName;&#10;croppedSequence.setName(newName);&#10;croppedSequence.setFilename(newName);&#10;output0 = croppedSequence;&#10;output1 = roiCopy;" visible="false"/>
 <variable ID="1531107574:148507260:Add Input" blockID="1531107574" value="1" visible="false"/>
 <variable ID="1531107574:148507260:Add output" blockID="1531107574" value="1" visible="false"/>
 <variable ID="1531107574:148507260:input0" blockID="1531107574" value="" visible="false"/>
 <variable ID="1531107574:148507260:919504760" blockID="1531107574" value="" visible="false"/>
+<variable ID="1531107574:853029192:folder" blockID="1531107574" value="/home/paraiko/J20-_6e10/test-output" visible="false"/>
+<variable ID="1531107574:853029192:sequence" blockID="1531107574" visible="false"/>
+<variable ID="1531107574:105735108:sequence" blockID="1531107574" visible="false"/>
+<variable ID="1531107574:105735108:rois" blockID="1531107574" value="1 ROI" visible="false"/>
+<variable ID="1531107574:105735108:value" blockID="1531107574" value="0.0" visible="false"/>
 </input>
 <output>
 <variable ID="iteration" blockID="1078018877" visible="true"/>

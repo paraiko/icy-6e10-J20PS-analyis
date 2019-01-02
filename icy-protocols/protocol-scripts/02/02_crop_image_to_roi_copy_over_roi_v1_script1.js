@@ -41,4 +41,4 @@ newName = seqName + "_" + roiName;
 croppedSequence.setName(newName);
 croppedSequence.setFilename(newName);
 output0 = croppedSequence;
-output1 = roiName;
+output1 = roiCopy;
