@@ -1,6 +1,6 @@
 <protocol VERSION="4">
 <blocks>
-<workflow ID="2073418174" blockType="plugins.adufour.blocks.lang.SequenceFileBatch" className="plugins.adufour.blocks.lang.SequenceFileBatch" collapsed="false" definedName="Sequence file batch" height="766" keepsResults="true" width="1096" xLocation="0" yLocation="0">
+<workflow ID="2073418174" blockType="plugins.adufour.blocks.lang.SequenceFileBatch" className="plugins.adufour.blocks.lang.SequenceFileBatch" collapsed="false" definedName="Sequence file batch" height="766" keepsResults="true" width="1298" xLocation="0" yLocation="0">
 <blocks>
 <block ID="965488337" blockType="plugins.adufour.blocks.tools.roi.GetROIFromSequence" className="plugins.adufour.blocks.tools.roi.GetROIFromSequence" collapsed="false" definedName="Get ROI from sequence" height="105" keepsResults="true" width="266" xLocation="248" yLocation="0">
 <variables>
@@ -17,8 +17,8 @@
 <variables>
 <input>
 <variable ID="input" name="input" runtime="false" visible="true"/>
-<variable ID="filterX" name="sigma (x)" runtime="false" value="3.0" visible="true"/>
-<variable ID="filterY" name="sigma (y)" runtime="false" value="3.0" visible="true"/>
+<variable ID="filterX" name="sigma (x)" runtime="false" value="4.0" visible="true"/>
+<variable ID="filterY" name="sigma (y)" runtime="false" value="4.0" visible="true"/>
 <variable ID="filterZ" name="sigma (z)" runtime="false" value="0.0" visible="true"/>
 </input>
 <output>
@@ -71,7 +71,7 @@
 </output>
 </variables>
 </block>
-<block ID="364691845" blockType="plugins.adufour.roi.ROIMeasures" className="plugins.adufour.roi.ROIMeasures" collapsed="false" definedName="ROI Statistics" height="127" keepsResults="true" width="317" xLocation="755" yLocation="284">
+<block ID="364691845" blockType="plugins.adufour.roi.ROIMeasures" className="plugins.adufour.roi.ROIMeasures" collapsed="false" definedName="ROI Statistics" height="127" keepsResults="true" width="317" xLocation="729" yLocation="284">
 <variables>
 <input>
 <variable ID="measures" name="Select features..." runtime="false" value="33286193164" visible="true"/>
@@ -83,13 +83,42 @@
 </output>
 </variables>
 </block>
-<block ID="522477931" blockType="plugins.adufour.blocks.tools.io.WorkbookToFile" className="plugins.adufour.blocks.tools.io.WorkbookToFile" collapsed="false" definedName="Workbook to file" height="267" keepsResults="true" width="617" xLocation="248" yLocation="436">
+<block ID="522477931" blockType="plugins.adufour.blocks.tools.io.WorkbookToFile" className="plugins.adufour.blocks.tools.io.WorkbookToFile" collapsed="false" definedName="Workbook to file" height="267" keepsResults="true" width="636" xLocation="618" yLocation="426">
 <variables>
 <input>
 <variable ID="workbook" name="workbook" runtime="false" visible="true"/>
 <variable ID="file format" name="file format" runtime="false" value="Spreadsheet" visible="true"/>
-<variable ID="output file" name="output file" runtime="false" value="/home/paraiko/J20-_6e10/test-output/testwb" visible="true"/>
+<variable ID="output file" name="output file" runtime="false" value="/home/paraiko/J20-_6e10/05_output/6e10_threshold-30_output" visible="true"/>
 <variable ID="If file exists" name="If file exists" runtime="false" value="Merge_sheets___excluding_first_row" visible="true"/>
+</input>
+<output/>
+</variables>
+</block>
+<block ID="1224600919" blockType="plugins.adufour.blocks.tools.roi.AddROIToSequence" className="plugins.adufour.blocks.tools.roi.AddROIToSequence" collapsed="false" definedName="Add ROI to sequence" height="107" keepsResults="true" width="220" xLocation="103" yLocation="408">
+<variables>
+<input>
+<variable ID="target sequence" name="Source" runtime="false" visible="true"/>
+<variable ID="input rois" name="ROI to add" runtime="false" visible="true"/>
+<variable ID="replace existing" name="Overwrite" runtime="false" value="false" visible="true"/>
+</input>
+<output/>
+</variables>
+</block>
+<block ID="1022332245" blockType="plugins.adufour.blocks.tools.roi.AddROIToSequence" className="plugins.adufour.blocks.tools.roi.AddROIToSequence" collapsed="false" definedName="Add ROI to sequence" height="107" keepsResults="true" width="220" xLocation="98" yLocation="522">
+<variables>
+<input>
+<variable ID="target sequence" name="Source" runtime="false" visible="true"/>
+<variable ID="input rois" name="ROI to add" runtime="false" visible="true"/>
+<variable ID="replace existing" name="Overwrite" runtime="false" value="false" visible="true"/>
+</input>
+<output/>
+</variables>
+</block>
+<block ID="1394218373" blockType="plugins.adufour.blocks.tools.io.SequenceToFile" className="plugins.adufour.blocks.tools.io.SequenceToFile" collapsed="false" definedName="Sequence to file" height="83" keepsResults="true" width="232" xLocation="363" yLocation="502">
+<variables>
+<input>
+<variable ID="folder" name="File or folder" runtime="false" value="/home/paraiko/J20-_6e10/04_treshold_output" visible="true"/>
+<variable ID="sequence" name="sequence" runtime="false" visible="true"/>
 </input>
 <output/>
 </variables>
@@ -99,25 +128,30 @@
 <link dstBlockID="965488337" dstVarID="input sequence" srcBlockID="2073418174" srcVarID="Sequence"/>
 <link dstBlockID="2119048107" dstVarID="input" srcBlockID="965488337" srcVarID="input sequence"/>
 <link dstBlockID="984519307" dstVarID="input rois" srcBlockID="965488337" srcVarID="extracted rois"/>
+<link dstBlockID="1022332245" dstVarID="input rois" srcBlockID="965488337" srcVarID="extracted rois"/>
 <link dstBlockID="1495536768" dstVarID="Input" srcBlockID="2119048107" srcVarID="output"/>
 <link dstBlockID="984519307" dstVarID="target sequence" srcBlockID="1495536768" srcVarID="Input"/>
 <link dstBlockID="45211656" dstVarID="rois(s)" srcBlockID="1495536768" srcVarID="ROI"/>
+<link dstBlockID="1224600919" dstVarID="target sequence" srcBlockID="1495536768" srcVarID="output"/>
+<link dstBlockID="1224600919" dstVarID="input rois" srcBlockID="1495536768" srcVarID="ROI"/>
 <link dstBlockID="45211656" dstVarID="sequence" srcBlockID="984519307" srcVarID="target sequence"/>
 <link dstBlockID="2003625825" dstVarID="input sequence" srcBlockID="45211656" srcVarID="sequence"/>
 <link dstBlockID="364691845" dstVarID="Regions of interest" srcBlockID="2003625825" srcVarID="extracted rois"/>
 <link dstBlockID="364691845" dstVarID="Sequence" srcBlockID="2003625825" srcVarID="input sequence"/>
 <link dstBlockID="522477931" dstVarID="workbook" srcBlockID="364691845" srcVarID="Workbook"/>
+<link dstBlockID="1022332245" dstVarID="target sequence" srcBlockID="1224600919" srcVarID="target sequence"/>
+<link dstBlockID="1394218373" dstVarID="sequence" srcBlockID="1022332245" srcVarID="target sequence"/>
 </links>
 <variables>
 <input>
-<variable ID="folder" blockID="2073418174" value="/home/paraiko/J20-_6e10/test-output" visible="true"/>
-<variable ID="extension" blockID="2073418174" value=".tif" visible="true"/>
+<variable ID="folder" blockID="2073418174" value="/home/paraiko/J20-_6e10/03_roi-cropped_external-0filled" visible="true"/>
+<variable ID="extension" blockID="2073418174" value="tif" visible="true"/>
 <variable ID="Include sub-folders" blockID="2073418174" value="false" visible="true"/>
 <variable ID="965488337:input sequence" blockID="965488337" visible="false"/>
 <variable ID="965488337:selection state of ROI to extract" blockID="965488337" value="ALL" visible="false"/>
 <variable ID="2119048107:input" blockID="2119048107" visible="false"/>
-<variable ID="2119048107:filterX" blockID="2119048107" value="3.0" visible="false"/>
-<variable ID="2119048107:filterY" blockID="2119048107" value="3.0" visible="false"/>
+<variable ID="2119048107:filterX" blockID="2119048107" value="4.0" visible="false"/>
+<variable ID="2119048107:filterY" blockID="2119048107" value="4.0" visible="false"/>
 <variable ID="2119048107:filterZ" blockID="2119048107" value="0.0" visible="false"/>
 <variable ID="1495536768:Input" blockID="1495536768" visible="false"/>
 <variable ID="1495536768:channel" blockID="1495536768" value="0" visible="false"/>
@@ -127,17 +161,25 @@
 <variable ID="984519307:input rois" blockID="984519307" value="1 ROI" visible="false"/>
 <variable ID="984519307:replace existing" blockID="984519307" value="false" visible="false"/>
 <variable ID="45211656:sequence" blockID="45211656" visible="false"/>
-<variable ID="45211656:rois(s)" blockID="45211656" value="No ROI" visible="false"/>
+<variable ID="45211656:rois(s)" blockID="45211656" value="1 ROI" visible="false"/>
 <variable ID="45211656:remove" blockID="45211656" value="false" visible="false"/>
 <variable ID="2003625825:input sequence" blockID="2003625825" visible="false"/>
 <variable ID="2003625825:selection state of ROI to extract" blockID="2003625825" value="ALL" visible="false"/>
 <variable ID="364691845:measures" blockID="364691845" value="33286193164" visible="false"/>
-<variable ID="364691845:Regions of interest" blockID="364691845" value="1 ROI" visible="false"/>
+<variable ID="364691845:Regions of interest" blockID="364691845" value="2 ROI" visible="false"/>
 <variable ID="364691845:Sequence" blockID="364691845" visible="false"/>
 <variable ID="522477931:workbook" blockID="522477931" value="" visible="false"/>
 <variable ID="522477931:file format" blockID="522477931" value="Spreadsheet" visible="false"/>
-<variable ID="522477931:output file" blockID="522477931" value="/home/paraiko/J20-_6e10/test-output/testwb" visible="false"/>
+<variable ID="522477931:output file" blockID="522477931" value="/home/paraiko/J20-_6e10/05_output/6e10_threshold-30_output" visible="false"/>
 <variable ID="522477931:If file exists" blockID="522477931" value="Merge_sheets___excluding_first_row" visible="false"/>
+<variable ID="1224600919:target sequence" blockID="1224600919" visible="false"/>
+<variable ID="1224600919:input rois" blockID="1224600919" value="1 ROI" visible="false"/>
+<variable ID="1224600919:replace existing" blockID="1224600919" value="false" visible="false"/>
+<variable ID="1022332245:target sequence" blockID="1022332245" visible="false"/>
+<variable ID="1022332245:input rois" blockID="1022332245" value="1 ROI" visible="false"/>
+<variable ID="1022332245:replace existing" blockID="1022332245" value="false" visible="false"/>
+<variable ID="1394218373:folder" blockID="1394218373" value="/home/paraiko/J20-_6e10/04_treshold_output" visible="false"/>
+<variable ID="1394218373:sequence" blockID="1394218373" visible="false"/>
 </input>
 <output>
 <variable ID="iteration" blockID="2073418174" visible="true"/>

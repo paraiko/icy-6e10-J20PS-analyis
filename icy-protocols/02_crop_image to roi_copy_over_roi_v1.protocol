@@ -53,7 +53,7 @@
 <block ID="853029192" blockType="plugins.adufour.blocks.tools.io.SequenceToFile" className="plugins.adufour.blocks.tools.io.SequenceToFile" collapsed="false" definedName="Sequence to file" height="83" keepsResults="true" width="194" xLocation="798" yLocation="370">
 <variables>
 <input>
-<variable ID="folder" name="File or folder" runtime="false" value="/home/paraiko/J20-_6e10/test-output" visible="true"/>
+<variable ID="folder" name="File or folder" runtime="false" value="/home/paraiko/J20-_6e10/03_roi-cropped_external-0filled" visible="true"/>
 <variable ID="sequence" name="sequence" runtime="false" visible="true"/>
 </input>
 <output/>
@@ -63,8 +63,8 @@
 <links>
 <link dstBlockID="148507260" dstVarID="919504760" srcBlockID="1531107574" srcVarID="iteration"/>
 <link dstBlockID="105735108" dstVarID="sequence" srcBlockID="148507260" srcVarID="output0" srcVarType="icy.sequence.Sequence"/>
-<link dstBlockID="853029192" dstVarID="sequence" srcBlockID="105735108" srcVarID="sequence"/>
 <link dstBlockID="105735108" dstVarID="rois" srcBlockID="148507260" srcVarID="633115472" srcVarType="[Licy.roi.ROI;"/>
+<link dstBlockID="853029192" dstVarID="sequence" srcBlockID="105735108" srcVarID="sequence"/>
 </links>
 <variables>
 <input>
@@ -76,11 +76,11 @@
 <variable ID="148507260:Add output" blockID="148507260" value="1" visible="false"/>
 <variable ID="148507260:input0" blockID="148507260" value="" visible="true"/>
 <variable ID="148507260:919504760" blockID="148507260" value="" visible="false"/>
-<variable ID="853029192:folder" blockID="853029192" value="/home/paraiko/J20-_6e10/test-output" visible="false"/>
-<variable ID="853029192:sequence" blockID="853029192" visible="false"/>
 <variable ID="105735108:sequence" blockID="105735108" visible="false"/>
 <variable ID="105735108:rois" blockID="105735108" value="1 ROI" visible="false"/>
 <variable ID="105735108:value" blockID="105735108" value="0.0" visible="false"/>
+<variable ID="853029192:folder" blockID="853029192" value="/home/paraiko/J20-_6e10/03_roi-cropped_external-0filled" visible="false"/>
+<variable ID="853029192:sequence" blockID="853029192" visible="false"/>
 </input>
 <output>
 <variable ID="iteration" blockID="1531107574" visible="true"/>
@@ -99,7 +99,7 @@
 </links>
 <variables>
 <input>
-<variable ID="folder" blockID="1078018877" value="/home/paraiko/J20-_6e10/test" visible="true"/>
+<variable ID="folder" blockID="1078018877" value="/home/paraiko/J20-_6e10/02_add-rois" visible="true"/>
 <variable ID="extension" blockID="1078018877" value="tif" visible="true"/>
 <variable ID="Include sub-folders" blockID="1078018877" value="false" visible="true"/>
 <variable ID="1775930538:input sequence" blockID="1775930538" visible="false"/>
@@ -113,11 +113,11 @@
 <variable ID="1531107574:148507260:Add output" blockID="1531107574" value="1" visible="false"/>
 <variable ID="1531107574:148507260:input0" blockID="1531107574" value="" visible="false"/>
 <variable ID="1531107574:148507260:919504760" blockID="1531107574" value="" visible="false"/>
-<variable ID="1531107574:853029192:folder" blockID="1531107574" value="/home/paraiko/J20-_6e10/test-output" visible="false"/>
-<variable ID="1531107574:853029192:sequence" blockID="1531107574" visible="false"/>
 <variable ID="1531107574:105735108:sequence" blockID="1531107574" visible="false"/>
 <variable ID="1531107574:105735108:rois" blockID="1531107574" value="1 ROI" visible="false"/>
 <variable ID="1531107574:105735108:value" blockID="1531107574" value="0.0" visible="false"/>
+<variable ID="1531107574:853029192:folder" blockID="1531107574" value="/home/paraiko/J20-_6e10/03_roi-cropped_external-0filled" visible="false"/>
+<variable ID="1531107574:853029192:sequence" blockID="1531107574" visible="false"/>
 </input>
 <output>
 <variable ID="iteration" blockID="1078018877" visible="true"/>
