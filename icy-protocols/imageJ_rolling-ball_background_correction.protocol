@@ -1,0 +1,49 @@
+<protocol VERSION="4">
+<blocks>
+<block ID="1385107148" blockType="plugins.adufour.blocks.tools.ij.SequenceToImagePlus" className="plugins.adufour.blocks.tools.ij.SequenceToImagePlus" collapsed="false" definedName="Sequence to image plus" height="83" keepsResults="true" width="276" xLocation="0" yLocation="16">
+<variables>
+<input>
+<variable ID="Icy Sequence" name="Icy Sequence" runtime="false" visible="true"/>
+</input>
+<output>
+<variable ID="IJ ImagePlus" name="ImagePlus" runtime="false" visible="true"/>
+</output>
+</variables>
+</block>
+<block ID="677568274" blockType="plugins.adufour.blocks.tools.ij.CallIJPlugin" className="plugins.adufour.blocks.tools.ij.CallIJPlugin" collapsed="false" definedName="Call IJ plugin" height="131" keepsResults="true" width="273" xLocation="23" yLocation="132">
+<variables>
+<input>
+<variable ID="Input ImagePlus" name="Input ImagePlus" runtime="false" visible="true"/>
+<variable ID="ImageJ plug-in name" name="plug-in name" runtime="false" value="Subtract Background..." visible="true"/>
+<variable ID="ImageJ plug-in parameters" name="parameters" runtime="false" value="rolling=50" visible="true"/>
+</input>
+<output>
+<variable ID="Output ImagePlus" name="Output (active) ImagePlus" runtime="false" visible="true"/>
+</output>
+</variables>
+</block>
+<block ID="1269331692" blockType="plugins.adufour.blocks.tools.ij.ImagePlusToSequence" className="plugins.adufour.blocks.tools.ij.ImagePlusToSequence" collapsed="false" definedName="Image plus to sequence" height="83" keepsResults="true" width="234" xLocation="0" yLocation="271">
+<variables>
+<input>
+<variable ID="IJ ImagePlus" name="IJ ImagePlus" runtime="false" visible="true"/>
+</input>
+<output>
+<variable ID="Icy Sequence" name="Icy Sequence" runtime="false" visible="true"/>
+</output>
+</variables>
+</block>
+<block ID="442873676" blockType="plugins.adufour.blocks.tools.Display" className="plugins.adufour.blocks.tools.Display" collapsed="false" definedName="Display" height="178" keepsResults="true" width="268" xLocation="251" yLocation="347">
+<variables>
+<input>
+<variable ID="object" name="object" runtime="false" type="icy.sequence.Sequence" visible="true"/>
+</input>
+<output/>
+</variables>
+</block>
+</blocks>
+<links>
+<link dstBlockID="677568274" dstVarID="Input ImagePlus" srcBlockID="1385107148" srcVarID="IJ ImagePlus"/>
+<link dstBlockID="1269331692" dstVarID="IJ ImagePlus" srcBlockID="677568274" srcVarID="Output ImagePlus"/>
+<link dstBlockID="442873676" dstVarID="object" srcBlockID="1269331692" srcVarID="Icy Sequence"/>
+</links>
+</protocol>
